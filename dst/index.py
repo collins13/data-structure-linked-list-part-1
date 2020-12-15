@@ -11,14 +11,34 @@ class Linked_list:
     
 
     def append(self, data):
-        new_node = Node(data);
+
         cur = self.head;
 
         while cur.next !=None:
             cur = cur.next;
 
-        cur.next = new_node;
+        cur.next = Node(data);
+    
 
+    def deleteNode(self, key):
+        temp =  self.head
+
+        if temp is not None:
+            if temp.data == key:
+                self.head = temp.next
+                temp = None;
+                return
+        while temp is not None:
+            if temp.data == key:
+                break;
+            prev = temp;
+            temp = prev.next
+        if temp == None:
+            return
+    
+        prev.next = temp.next
+        temp = None
+        
     def length(self):
         cur = self.head;
         total = 0;
@@ -35,6 +55,15 @@ class Linked_list:
             elems.append(cur_node.data);
         print(elems);
 
+    def contains(self, target):
+        curr = self.head
+        while curr.next != None:
+            if(curr.data == target):
+                return True;
+            curr = curr.next
+
+        return False;
+
 
 my_list = Linked_list();
 
@@ -42,7 +71,13 @@ my_list = Linked_list();
 
 my_list.append(1);
 my_list.append(5);
-my_list.append(10);
+my_list.append(7);
 my_list.length();
+print(my_list.contains(5));
+print(my_list.contains(1));
+print(my_list.contains(7));
+print(my_list.contains(12));
+my_list.deleteNode(5);
+my_list.deleteNode(1);
 # my_list.append(3);
 my_list.display();
